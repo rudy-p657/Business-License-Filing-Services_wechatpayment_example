@@ -25,7 +25,6 @@ miniprogram/                 小程序页面、组件、资源和 API 封装
 miniprogram/tests/            小程序侧支付与订单测试
 cloudfunctions/leqitong/      乐企通业务云函数
 cloudfunctions/leqitong/tests/ 云函数支付和退款测试
-api/api_info/                 企业查询接口说明
 web-admin/                    管理端静态页面与冒烟测试
 virtual-payment-assets/       微信虚拟支付商品素材
 ```
