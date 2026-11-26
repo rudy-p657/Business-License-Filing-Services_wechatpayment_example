@@ -36,6 +36,7 @@ WXCertUtil/
 *.exe
 *.dll
 *.lib
+zlib.def
 *.qm
 
 # Local generated reports and exports
