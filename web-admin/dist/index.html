@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#1769aa">
+  <title>乐企通管理后台</title>
+  <link rel="preconnect" href="https://static.cloudbase.net">
+  <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href="order-actions.css">
+</head>
+<body>
+  <div id="app" class="app-root">
+    <section id="login-view" class="login-view">
+      <div class="login-panel">
+        <div class="brand-mark">乐</div>
+        <p class="eyebrow">LE QI TONG · OPERATIONS</p>
+        <h1>乐企通管理后台</h1>
+        <p class="login-subtitle">登录后管理订单、客户资料和服务配置</p>
+        <form id="login-form" class="login-form">
+          <label>管理员手机号<input id="login-phone" inputmode="numeric" maxlength="11" autocomplete="username" placeholder="请输入手机号" required></label>
+          <label>登录密码<input id="login-password" type="password" autocomplete="current-password" placeholder="请输入登录密码" required></label>
+          <button class="primary-button full-width" type="submit">登录后台</button>
+        </form>
+        <p id="login-error" class="form-error" role="alert"></p>
+      </div>
+    </section>
+
+    <section id="shell-view" class="shell-view hidden">
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand"><span class="brand-mark small">乐</span><span>乐企通</span></div>
+        <nav class="nav-list" id="nav-list">
+          <button data-page="dashboard" class="nav-item active"><span class="nav-icon">▦</span><span>数据概览</span></button>
+          <button data-page="orders" class="nav-item"><span class="nav-icon">▤</span><span>订单管理</span></button>
+          <button data-page="announcements" class="nav-item"><span class="nav-icon">◷</span><span>公告管理</span></button>
+          <button data-page="services" class="nav-item"><span class="nav-icon">◇</span><span>服务配置</span></button>
+          <button data-page="users" class="nav-item owner-only"><span class="nav-icon">♙</span><span>管理员账号</span></button>
+        </nav>
+        <div class="sidebar-footer"><span class="status-dot"></span><span>云端环境已连接</span></div>
+      </aside>
+      <main class="main-content">
+        <header class="topbar">
+          <button id="menu-toggle" class="icon-button mobile-only" aria-label="打开菜单">☰</button>
+          <div><p class="page-kicker">管理中心</p><h2 id="page-title">数据概览</h2></div>
+          <div class="account-area"><span id="account-label">未登录</span><button id="logout-button" class="text-button">退出登录</button></div>
+        </header>
+        <div id="notice-bar" class="notice-bar hidden"></div>
+        <div id="page-content" class="page-content"></div>
+      </main>
+    </section>
+
+    <div id="toast" class="toast" role="status"></div>
+    <div id="modal-root"></div>
+  </div>
+  <script src="https://static.cloudbase.net/cloudbase-js-sdk/2.32.0/cloudbase.full.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

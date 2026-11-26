@@ -1,0 +1,82 @@
+<view class="page detail-page" wx:if="{{order}}">
+  <view class="card status-card">
+    <view class="status-title">{{statusText}}</view>
+    <view class="muted">订单号：{{order.orderNo}}</view>
+  </view>
+
+  <view class="card info-card">
+    <view class="section-title">企业信息</view>
+    <view class="info-row"><text>企业名称</text><text>{{order.company.name}}</text></view>
+    <view class="info-row"><text>统一社会信用代码</text><text>{{order.company.creditCode}}</text></view>
+    <view class="info-row"><text>法定代表人</text><text>{{order.company.legalPerson}}</text></view>
+    <view class="info-row"><text>执照状态</text><text>{{order.company.businessStatus}}</text></view>
+  </view>
+
+  <view class="card info-card">
+    <view class="section-title">客户资料</view>
+    <view class="info-row"><text>法人手机号</text><text>{{order.contactPhone}}</text></view>
+    <view class="info-row"><text>法人身份证</text><text>{{order.idCardNo}}</text></view>
+    <view class="info-row"><text>业务员工号</text><text>{{order.staffNo}}</text></view>
+    <view class="info-row"><text>员工号校验</text><text>{{order.staffVerifyResult.message || '-'}}</text></view>
+    <view class="info-row"><text>法人校验</text><text>{{order.legalVerifyResult.message || '-'}}</text></view>
+  </view>
+
+  <view class="card info-card">
+    <view class="section-title">服务与支付</view>
+    <view class="info-row"><text>服务项目</text><text>{{order.serviceName}}</text></view>
+    <view class="info-row"><text>订单金额</text><text class="price">¥ {{order.amountText}}</text></view>
+    <view class="info-row"><text>支付方式</text><text>{{order.payMode === 'virtual' ? '微信虚拟支付' : '扫码支付'}}</text></view>
+    <view class="info-row"><text>支付状态</text><text>{{paymentStatusText}}</text></view>
+    <view class="info-row refund-status-row" wx:if="{{order.refundStatus}}"><text>退款状态</text><text>{{refundStatusText}}</text></view>
+    <view class="info-row" wx:if="{{order.userConfirmedAt}}"><text>支付确认</text><text>{{order.userConfirmedAt}}</text></view>
+    <view class="info-row"><text>创建时间</text><text>{{order.createdAt}}</text></view>
+    <view class="remark" wx:if="{{order.adminRemark}}">管理员备注：{{order.adminRemark}}</view>
+  </view>
+
+  <view class="refund-refresh-row" wx:if="{{refundPending}}">
+    <text>退款处理中时，可手动查询微信的最新结果。</text>
+    <button class="secondary-btn refund-refresh-btn" loading="{{refreshingRefund}}" disabled="{{refreshingRefund}}" bindtap="refreshRefundState">刷新退款状态</button>
+  </view>
+
+  <view wx:if="{{isIOSPlatform && order.payMode === 'virtual' && !iosVirtualPaymentSupported && order.orderStatus === 'pending_payment'}}" class="offline-payment-guide">
+    <text class="offline-payment-title">需要升级微信版本</text>
+    <text class="offline-payment-copy">iOS 虚拟支付要求微信 8.0.68 及以上；升级后可继续在线支付，也可联系工作人员线下办理。</text>
+  </view>
+
+  <view wx:if="{{order.orderStatus === 'pending_payment'}}" class="pending-order-actions">
+    <button wx:if="{{isIOSPlatform && order.payMode === 'virtual' && !iosVirtualPaymentSupported}}" class="primary-btn contact-staff-btn" bindtap="openPay">联系工作人员线下付款</button>
+    <button wx:else class="primary-btn" loading="{{confirmingPayment}}" disabled="{{confirmingPayment || cancellingOrder}}" bindtap="openPay">{{order.payMode === 'virtual' ? '继续微信支付' : '继续扫码支付'}}</button>
+    <button class="secondary-btn cancel-order-btn" loading="{{cancellingOrder}}" disabled="{{confirmingPayment || cancellingOrder}}" bindtap="cancelOrder"><text class="cancel-order-icon">×</text><text>取消订单</text></button>
+  </view>
+
+  <view class="ios-payment-mask" wx:if="{{showIOSPaymentModal}}" bindtap="closeIOSPaymentModal"></view>
+  <view class="ios-payment-dialog" wx:if="{{showIOSPaymentModal}}" catchtap="noop">
+    <view class="ios-payment-title">请联系工作人员线下付款</view>
+    <view class="ios-payment-copy">{{iosPaymentFallbackMessage}}</view>
+    <view class="ios-payment-order">订单号：{{order.orderNo}}</view>
+    <view class="ios-payment-amount">订单金额：¥{{order.amountText}}</view>
+    <button class="ios-payment-contact" open-type="contact" session-from="乐企通订单号：{{order.orderNo}}">联系工作人员</button>
+    <button class="ios-payment-dismiss" bindtap="closeIOSPaymentModal">稍后处理</button>
+  </view>
+
+  <view class="modal-mask" wx:if="{{showPayModal}}">
+    <view class="pay-modal">
+      <view class="modal-title">扫码支付</view>
+      <view class="order-no">订单号：{{order.orderNo}}</view>
+      <view class="price-breakdown"><text>原价 ￥{{order.originalAmountText}}</text><text>优惠 -￥{{order.discountText}}</text></view>
+      <view class="pay-amount">￥{{order.amountText}}</view>
+      <view class="pay-notice">请务必按照上述金额支付</view>
+      <image wx:if="{{order.paymentQrAvailable}}" class="qr" src="{{order.paymentQrUrl}}" mode="aspectFit" bindtap="previewQr" binderror="onQrError"></image>
+      <view wx:else class="qr-placeholder">收款二维码暂未配置<br/>请联系客服后再支付</view>
+      <view class="pay-apps">
+        <image class="pay-app-icon" src="/images/wechat-pay.webp" mode="aspectFit"></image>
+        <image class="pay-app-icon" src="/images/alipay.webp" mode="aspectFit"></image>
+      </view>
+      <view class="modal-text">请打开微信或者支付宝【扫一扫】，选择相册图片完成支付</view>
+      <view class="modal-text danger">支付完成后，请务必点击下方按钮</view>
+      <button class="save-btn" bindtap="saveQr">保存二维码</button>
+      <button class="done-btn" loading="{{confirmingPayment}}" disabled="{{confirmingPayment || !order.paymentQrAvailable}}" bindtap="confirmPaid">{{confirmingPayment ? '正在提交' : '我已完成支付'}}</button>
+      <button class="close-btn" bindtap="closePay">暂不支付</button>
+    </view>
+  </view>
+</view>

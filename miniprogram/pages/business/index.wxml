@@ -1,0 +1,107 @@
+<view class="business-page">
+  <view class="page business-content">
+    <view class="card company-card">
+      <view class="company-name">{{company.name}}</view>
+      <view class="company-line">统一社会信用代码：{{company.creditCode}}</view>
+      <view class="company-line">法定代表人/经营者：{{company.legalPerson}}</view>
+    </view>
+
+    <view wx:if="{{!privacyAuthorized}}" class="card privacy-required-card">
+      <view class="privacy-required-title">提交业务资料前需要您的授权</view>
+      <view class="privacy-required-text">本页面会收集法人或负责人手机号、身份证号、业务员工号及企业办理资料，用于企业年报代办、身份核验、订单处理和进度通知。资料将通过腾讯云 CloudBase 保存；企业名称、统一社会信用代码、法人姓名或您输入的查询手机号会提供给水滴信用，用于企业信息和年报查询。运营主体为乐企通，联系电话：18760603320。资料仅向办理本业务所需的工作人员及服务商提供，并在业务办理、售后及争议处理完成所需的期限内保存。</view>
+      <view class="privacy-required-text">请先阅读<text class="agreement-link" bindtap="openPrivacyContract">《用户隐私保护指引》</text>，再点击下方按钮授权。</view>
+      <button class="privacy-authorize-btn" open-type="agreePrivacyAuthorization" bindagreeprivacyauthorization="handlePrivacyAuthorization">阅读并同意隐私指引</button>
+    </view>
+
+    <view wx:if="{{privacyAuthorized}}" class="card form-card">
+      <view class="form-row"><text class="form-label">法人手机号：</text><input value="{{contactPhone}}" type="number" maxlength="11" placeholder="请输入手机号" bindinput="onInput" data-field="contactPhone" /></view>
+      <view class="form-row"><text class="form-label">法人身份证：</text><input value="{{idCardNo}}" maxlength="18" placeholder="请输入身份证号" bindinput="onInput" data-field="idCardNo" /></view>
+      <view class="form-row no-border"><text class="form-label">业务员工号：</text><input value="{{staffNo}}" placeholder="请输入业务员工号(必填)" bindinput="onInput" data-field="staffNo" /></view>
+    </view>
+
+    <view class="card report-card">
+      <view class="center-title"><view></view><text>企业状态与年报</text><view></view></view>
+      <view class="status-box"><text>营业执照状态：</text><text class="ok">{{company.businessStatus}}</text></view>
+      <view class="status-box abnormal-box" wx:if="{{annual.abnormal}}"><text>年报状态：</text><text class="danger">{{annual.businessStatus}}</text><view class="abnormal-reason">{{annual.abnormalReason}}</view></view>
+      <view class="status-box normal-box" wx:if="{{!annual.abnormal && annual.reports.length}}"><text>年报状态：</text><text class="ok">正常</text></view>
+      <view class="status-box unavailable-box" wx:if="{{annual.message}}"><text>年报状态：</text><text class="danger">{{annual.message}}</text></view>
+      <view class="table">
+        <view class="tr th"><text>年度</text><text>是否年报</text></view>
+        <view class="tr" wx:for="{{topReports}}" wx:key="year"><text>{{item.year}}</text><text class="{{item.submitted ? 'ok' : 'danger'}}">{{item.label}}</text></view>
+      </view>
+      <view class="all-record" wx:if="{{annual.hasMoreReports}}" bindtap="openReportModal">查看全部 {{annual.total}} 年记录 ></view>
+      <view class="center-title flow-title"><view></view><text>年报服务流程</text><view></view></view>
+      <view class="flow">①填写信息 --- ②支付费用 --- ③报送办理</view>
+      <view class="warn">注：本小程序为企业提供代办服务，全程为自愿行为。如服务未完成，可以申请全额退款。</view>
+      <view class="center-title flow-title"><view></view><text>年报代办服务 享受快捷申报</text><view></view></view>
+      <view class="check-line">✓ 填报内容指导，内容合规检查</view>
+      <view class="check-line">✓ 手机操作更轻松，足不出户完成申报</view>
+      <view class="check-line">✓ 专属客服服务，有问题快速响应</view>
+      <view class="check-line">✓ 报送速度快，及时知晓报送结果</view>
+    </view>
+
+    <view class="card service-card">
+      <view class="service-title">选择服务类型</view>
+      <view class="service-option {{selectedServiceId === item.id ? 'active' : ''}}" wx:for="{{services}}" wx:key="id" data-id="{{item.id}}" bindtap="selectService">
+        <view><view class="option-name">{{item.name}}</view><view class="muted">{{item.description}}</view></view>
+        <view class="option-price" wx:if="{{item.price > 0}}">￥{{item.priceText}}</view>
+        <view class="muted" wx:else>价格待定</view>
+      </view>
+    </view>
+
+    <view wx:if="{{privacyAuthorized}}" class="agreement">
+      <view class="radio {{agreement ? 'checked' : ''}}" bindtap="toggleAgreement"></view>
+      <text bindtap="toggleAgreement">我已阅读并同意</text><text class="agreement-link" bindtap="openAgreement">《用户协议及隐私政策》</text>
+    </view>
+  </view>
+
+  <view class="pay-bar"><view>合计：<text wx:if="{{total > 0}}" class="price">￥{{totalText}}</text><text wx:else class="muted">请选择服务</text></view><button class="pay-btn {{canSubmit && !creatingOrder ? '' : 'disabled'}}" disabled="{{!canSubmit || creatingOrder}}" loading="{{creatingOrder}}" bindtap="submitOrder">{{creatingOrder ? '正在创建订单' : '确认支付'}}</button></view>
+
+  <view class="modal-mask" wx:if="{{showAgreement}}" bindtap="closeAgreement"></view>
+  <view class="info-modal" wx:if="{{showAgreement}}">
+    <view class="modal-title">用户协议及隐私政策</view>
+    <scroll-view class="info-modal-body" scroll-y="true">
+      <view class="p-text">1. 本协议将成为我司为您代办年检年审年报事宜所签署的具有法律约束力的文件。您已充分阅读、理解并接受本协议的全部内容。</view>
+      <view class="p-text">2. 报送年报是企业依法应履行的义务。您知悉并同意通过我司代办年报报送，并按页面所示支付代办服务费用。</view>
+      <view class="p-text">3. 我们收集的资料包括：法人或负责人手机号、身份证号、业务员工号、企业名称及统一社会信用代码、企业经营状况和您提交的年报办理资料。</view>
+      <view class="p-text">4. 手机号用于联系您、核验订单及发送办理进度；身份证号用于核验法人或负责人身份、办理企业年报服务；企业资料用于查询企业状态、生成订单和完成代办服务。除完成上述目的外，不用于无关营销。</view>
+      <view class="p-text">5. 为提供企业信息和年报查询，我们会将您输入的企业名称、统一社会信用代码、法人姓名或查询手机号发送给水滴信用接口。订单及办理资料通过腾讯云 CloudBase 云开发保存，并向本业务所需的客服、审核和办理人员提供。</view>
+      <view class="p-text">6. 我们会采取访问控制等措施保护资料。手机号、身份证号及订单办理资料通过腾讯云 CloudBase 保存，用于业务办理、订单管理、财务核对、售后及争议处理；在相关业务和管理需要期间，资料仅向办理本业务所需的工作人员及服务商提供。</view>
+      <view class="p-text">7. 本小程序运营主体为乐企通，联系电话：18760603320。您可以通过该联系方式申请查询、更正、删除个人信息，或撤回授权；撤回授权可能导致无法继续办理依赖该信息的业务。</view>
+      <view class="p-text">8. 在年报报送成功前，您可以申请停止办理，退款规则以页面说明和实际服务进度为准。其他争议由双方协商解决，协商不成的依法处理。</view>
+    </scroll-view>
+    <button class="modal-footer" bindtap="closeAgreement">我已知晓并同意</button>
+  </view>
+
+  <view class="modal-mask" wx:if="{{showAllReports}}" bindtap="closeReportModal"></view>
+  <view class="info-modal report-modal" wx:if="{{showAllReports}}">
+    <view class="modal-title">全部历年年报</view>
+    <scroll-view class="info-modal-body" scroll-y="true">
+      <view class="table">
+        <view class="tr th"><text>年度</text><text>是否年报</text></view>
+        <view class="tr" wx:for="{{annual.allReports}}" wx:key="year"><text>{{item.year}}</text><text class="{{item.submitted ? 'ok' : 'danger'}}">{{item.label}}</text></view>
+      </view>
+    </scroll-view>
+    <button class="modal-footer" bindtap="closeReportModal">关闭</button>
+  </view>
+
+  <view class="modal-mask" wx:if="{{showPayModal}}"></view>
+  <view class="pay-modal" wx:if="{{showPayModal}}">
+    <view class="modal-title">扫码支付</view>
+    <view class="order-no">订单号：{{currentOrder.orderNo}}</view>
+    <view class="price-breakdown"><text>原价 ￥{{currentOrder.originalAmountText}}</text><text>优惠 -￥{{currentOrder.discountText}}</text></view>
+    <view class="pay-amount">￥{{currentOrder.amountText}}</view>
+    <view class="pay-notice">请务必按照上述金额支付</view>
+    <image wx:if="{{currentOrder.paymentQrAvailable}}" class="qr" src="{{currentOrder.paymentQrUrl}}" mode="aspectFit" bindtap="previewQr" binderror="onQrError"></image>
+    <view wx:else class="qr-placeholder">收款二维码暂未配置<br/>请联系客服后再支付</view>
+    <view class="pay-apps">
+      <image class="pay-app-icon" src="/images/wechat-pay.webp" mode="aspectFit"></image>
+      <image class="pay-app-icon" src="/images/alipay.webp" mode="aspectFit"></image>
+    </view>
+    <view class="modal-text">请打开微信或者支付宝【扫一扫】，选择相册图片完成支付</view>
+    <view class="modal-text danger">支付完成后，请务必点击下方按钮</view>
+    <button class="save-btn" bindtap="saveQr">保存二维码</button>
+    <button class="done-btn" loading="{{confirmingPayment}}" disabled="{{confirmingPayment || !currentOrder.paymentQrAvailable}}" bindtap="confirmPaid">{{confirmingPayment ? '正在提交' : '我已完成支付'}}</button>
+    <button class="close-btn" bindtap="closePay">暂不支付</button>
+  </view>
+</view>

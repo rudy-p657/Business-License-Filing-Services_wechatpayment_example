@@ -1,0 +1,267 @@
+.service-page {
+  padding-top: 20rpx;
+}
+
+.banner {
+  display: block;
+  width: 100%;
+  height: 300rpx;
+  border-radius: 22rpx;
+  margin-bottom: 26rpx;
+}
+
+.search-card,
+.notice-card,
+.service-list {
+  padding: 32rpx 30rpx;
+  margin-bottom: 28rpx;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 18rpx;
+}
+
+.service-icon {
+  width: 34rpx;
+  height: 42rpx;
+  position: relative;
+  border-radius: 5rpx;
+  background: linear-gradient(180deg, #2b90ee, #1677d2);
+}
+
+.service-icon::before {
+  content: "";
+  position: absolute;
+  left: 10rpx;
+  top: 8rpx;
+  width: 14rpx;
+  height: 4rpx;
+  background: #ffffff;
+  box-shadow: 0 10rpx 0 #ffffff, 0 20rpx 0 #ffffff;
+}
+
+.service-icon::after {
+  content: "";
+  position: absolute;
+  right: -7rpx;
+  bottom: 3rpx;
+  width: 16rpx;
+  height: 16rpx;
+  border: 4rpx solid #ffffff;
+  border-radius: 50%;
+  background: #1677d2;
+}
+
+.header-title {
+  color: #202633;
+  font-size: 36rpx;
+  font-weight: 800;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  height: 88rpx;
+  margin-top: 28rpx;
+  padding-left: 28rpx;
+  background: #f3f5f8;
+  border-radius: 44rpx;
+}
+
+.search-icon {
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 18rpx;
+  border: 5rpx solid #a5adb9;
+  border-radius: 50%;
+  position: relative;
+}
+
+.search-icon::after {
+  content: "";
+  position: absolute;
+  right: -14rpx;
+  bottom: -10rpx;
+  width: 18rpx;
+  height: 5rpx;
+  background: #a5adb9;
+  transform: rotate(45deg);
+  border-radius: 8rpx;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 0;
+  height: 88rpx;
+  color: #202633;
+  font-size: 31rpx;
+}
+
+.placeholder {
+  color: #afb5bf;
+}
+
+.search-btn {
+  flex: 0 0 128rpx;
+  width: 128rpx;
+  height: 60rpx;
+  color: #202633;
+  font-weight: 800;
+  font-size: 30rpx;
+  border-left: 2rpx solid #e0e4ea;
+  line-height: 60rpx;
+  text-align: center;
+}
+
+.search-tip {
+  margin-top: 22rpx;
+  color: #9aa2ad;
+  font-size: 27rpx;
+}
+
+.notice-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24rpx;
+}
+
+.more {
+  color: #9aa2ad;
+  font-size: 28rpx;
+}
+
+.notice-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 20rpx;
+  padding: 28rpx 0;
+  border-bottom: 1rpx dashed #e6eaf0;
+  color: #313844;
+  font-size: 30rpx;
+}
+
+.notice-item:last-child {
+  border-bottom: none;
+}
+
+.block-title {
+  margin: 38rpx 0 24rpx;
+  color: #202633;
+  font-size: 38rpx;
+  font-weight: 800;
+}
+
+.adv-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24rpx;
+}
+
+.adv-card {
+  min-height: 210rpx;
+  padding: 30rpx 28rpx;
+}
+
+.adv-icon {
+  width: 60rpx;
+  height: 60rpx;
+  margin-bottom: 28rpx;
+  color: #1677d2;
+  border: 3rpx solid #1677d2;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 56rpx;
+}
+
+.adv-title {
+  margin-bottom: 12rpx;
+  font-size: 32rpx;
+  font-weight: 800;
+}
+
+.adv-desc,
+.service-desc {
+  font-size: 26rpx;
+}
+
+.service-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 20rpx;
+  padding: 26rpx 0;
+  border-bottom: 1rpx solid #edf0f5;
+}
+
+.service-item:last-child {
+  border-bottom: none;
+}
+
+.service-name {
+  margin-bottom: 10rpx;
+  color: #202633;
+  font-size: 30rpx;
+  font-weight: 700;
+}
+
+.privacy-mask {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.privacy-popup {
+  position: fixed;
+  left: 48rpx;
+  right: 48rpx;
+  top: 28vh;
+  z-index: 21;
+  padding: 34rpx;
+  background: #ffffff;
+  border-radius: 18rpx;
+}
+
+.pd-title {
+  margin-bottom: 22rpx;
+  color: #202633;
+  font-size: 34rpx;
+  font-weight: 800;
+  text-align: center;
+}
+
+.pd-content {
+  color: #586273;
+  font-size: 28rpx;
+  line-height: 1.8;
+}
+
+.pd-link {
+  color: #1677d2;
+}
+
+.pd-btn-group {
+  display: flex;
+  gap: 18rpx;
+  margin-top: 30rpx;
+}
+
+.pd-btn {
+  flex: 1;
+  height: 78rpx;
+  border-radius: 39rpx;
+  font-size: 29rpx;
+  line-height: 78rpx;
+}
+
+.pd-btn-reject {
+  color: #7b8493;
+  background: #f2f4f7;
+}
+
+.pd-btn-agree {
+  color: #ffffff;
+  background: #1677d2;
+}

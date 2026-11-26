@@ -1,0 +1,19 @@
+<view class="page announcement-page">
+  <view class="page-title">最新公告</view>
+  <view wx:if="{{isLoading}}" class="announcement-loading">
+    <view class="loading-spinner"></view>
+    <view>公告加载中</view>
+  </view>
+  <view wx:elif="{{loadError}}" class="announcement-error">
+    <view>{{loadError}}</view>
+    <button class="retry-btn" bindtap="retryLoad">重新加载</button>
+  </view>
+  <view wx:if="{{!isLoading && !loadError}}" class="card list-card">
+    <view wx:if="{{!isLoading && !loadError}}" class="list-item" wx:for="{{announcements}}" wx:key="id" data-id="{{item.id}}" bindtap="goDetail">
+      <view class="item-title">{{item.title}}</view>
+      <view class="item-date">{{item.publishedAt}}</view>
+      <text class="arrow">›</text>
+    </view>
+    <view wx:if="{{!isLoading && !loadError && announcements.length === 0}}" class="empty">没有更多内容了</view>
+  </view>
+</view>

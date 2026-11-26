@@ -1,0 +1,9 @@
+{
+  "name": "leqitong",
+  "version": "1.0.0",
+  "description": "乐企通小程序云函数接口聚合",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

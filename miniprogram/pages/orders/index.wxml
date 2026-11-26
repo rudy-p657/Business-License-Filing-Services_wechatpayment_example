@@ -1,0 +1,98 @@
+<view class="page orders-page">
+  <view wx:if="{{isLoading}}" class="order-loading">
+    <view class="loading-spinner"></view>
+    <view>订单加载中</view>
+  </view>
+  <view wx:elif="{{loadError}}" class="empty">
+    <view class="empty-title">{{loadError}}</view>
+    <button class="primary-btn" bindtap="loadOrders">重新加载</button>
+  </view>
+  <view wx:elif="{{orders.length === 0}}" class="empty">
+    <view class="empty-title">暂无订单</view>
+    <button class="primary-btn" bindtap="goService">去办理业务</button>
+  </view>
+  <view class="card order-card" wx:for="{{orders}}" wx:key="id" data-id="{{item.id}}" bindtap="goDetail">
+    <view class="order-top">
+      <view class="service-name">{{item.serviceName}}</view>
+      <view class="status-pill">{{item.statusText}}</view>
+    </view>
+    <view class="company">{{item.company.name}}</view>
+    <view class="info-line">
+      <text class="label">法定代表人</text>
+      <text>{{item.company.legalPerson}}</text>
+    </view>
+    <view class="info-line">
+      <text class="label">法人手机号</text>
+      <text>{{item.contactPhone}}</text>
+    </view>
+    <view class="info-line">
+      <text class="label">法人身份证</text>
+      <text>{{item.idCardNo}}</text>
+    </view>
+    <view class="info-line">
+      <text class="label">统一信用代码</text>
+      <text>{{item.company.creditCode}}</text>
+    </view>
+    <view class="info-line">
+      <text class="label">业务进度</text>
+      <text class="progress-text">{{item.serviceText}}</text>
+    </view>
+    <view class="info-line refund-status-line" wx:if="{{item.refundStatus}}">
+      <text class="label">退款状态</text>
+      <text>{{item.refundStatusText}}</text>
+    </view>
+    <view class="info-line remark-line">
+      <text class="label">管理员备注</text>
+      <text class="remark-text">{{item.remarkText}}</text>
+    </view>
+    <view class="extra-box" wx:if="{{item.extraInfo}}">
+      <view class="info-line">
+        <text class="label">上年度营业额</text>
+        <text>{{item.extraInfo.revenue}} 元</text>
+      </view>
+      <view class="info-line">
+        <text class="label">上年度纳税额</text>
+        <text>{{item.extraInfo.tax}} 元</text>
+      </view>
+      <view class="info-line">
+        <text class="label">从业人数</text>
+        <text>{{item.extraInfo.employeeCount}} 人</text>
+      </view>
+    </view>
+    <view class="meta">
+      <text>订单号：{{item.orderNo}}</text>
+      <text>{{item.createdAt}}</text>
+    </view>
+    <view class="order-bottom">
+      <text class="muted">金额</text>
+      <text class="price">¥ {{item.amountText}}</text>
+    </view>
+    <view class="action-row" catchtap="noop">
+      <button wx:if="{{item.orderStatus === 'pending_payment'}}" class="small-btn" data-id="{{item.id}}" bindtap="goPay">去支付</button>
+      <button wx:if="{{item.orderStatus === 'pending_payment'}}" class="small-btn cancel-order-btn" loading="{{cancellingOrderId === item.id}}" disabled="{{!!cancellingOrderId}}" data-id="{{item.id}}" bindtap="cancelOrder">取消订单</button>
+      <button wx:if="{{item.refundPending}}" class="small-btn refund-refresh-btn" loading="{{refreshingRefundId === item.id}}" disabled="{{!!refreshingRefundId}}" data-id="{{item.id}}" bindtap="refreshRefundState">刷新退款状态</button>
+      <button wx:if="{{item.needExtra}}" class="small-btn fill-btn" data-id="{{item.id}}" bindtap="openExtraModal">补充申报资料</button>
+    </view>
+  </view>
+
+  <view class="modal-mask" wx:if="{{showExtraModal}}" bindtap="closeExtraModal"></view>
+  <view class="extra-modal" wx:if="{{showExtraModal}}">
+    <view class="modal-title">补充申报必填资料</view>
+    <view class="form-item">
+      <view class="form-label">上年度营业额 (元)</view>
+      <input type="digit" value="{{extraForm.revenue}}" data-field="revenue" bindinput="onExtraInput" placeholder="请输入营业总收入金额" />
+    </view>
+    <view class="form-item">
+      <view class="form-label">上年度纳税总额 (元)</view>
+      <input type="digit" value="{{extraForm.tax}}" data-field="tax" bindinput="onExtraInput" placeholder="如未纳税请填0" />
+    </view>
+    <view class="form-item">
+      <view class="form-label">当前从业人数 (人)</view>
+      <input type="number" value="{{extraForm.employeeCount}}" data-field="employeeCount" bindinput="onExtraInput" placeholder="请输入具体人数" />
+    </view>
+    <view class="modal-actions">
+      <button class="cancel-btn" bindtap="closeExtraModal">暂不填写</button>
+      <button class="submit-btn" bindtap="submitExtraInfo">确认提交</button>
+    </view>
+  </view>
+</view>

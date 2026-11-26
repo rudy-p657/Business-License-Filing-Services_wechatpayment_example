@@ -1,0 +1,20 @@
+<view class="page announcement-page">
+  <view wx:if="{{isLoading}}" class="announcement-loading">
+    <view class="loading-spinner"></view>
+    <view class="loading-title">公告加载中</view>
+    <view class="loading-tip">正在获取公告内容，请稍候</view>
+  </view>
+
+  <view wx:elif="{{loadError && !announcement}}" class="announcement-error">
+    <view class="error-title">{{loadError}}</view>
+    <button class="retry-btn" bindtap="retryLoad">重新加载</button>
+  </view>
+
+  <view class="detail-card" wx:if="{{announcement}}">
+    <view class="detail-title">{{announcement.title}}</view>
+    <view class="detail-time">发布时间：{{announcement.publishedAt}}</view>
+    <view class="divider"></view>
+    <view class="detail-content">{{announcement.content || '公告正文暂未配置'}}</view>
+    <view wx:if="{{loadError && announcement}}" class="refresh-error">{{loadError}}</view>
+  </view>
+</view>

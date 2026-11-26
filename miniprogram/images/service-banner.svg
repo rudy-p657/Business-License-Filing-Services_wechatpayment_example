@@ -1,0 +1,14 @@
+<svg width="690" height="300" viewBox="0 0 690 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="690" y2="300" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B68B6"/>
+      <stop offset="1" stop-color="#1D9AEF"/>
+    </linearGradient>
+  </defs>
+  <rect width="690" height="300" rx="22" fill="url(#g)"/>
+  <path d="M0 229C103 179 158 226 250 186C355 141 450 164 536 108C599 67 646 77 690 55V300H0V229Z" fill="#064F93" opacity=".35"/>
+  <rect x="152" y="210" width="386" height="48" rx="24" fill="white"/>
+  <text x="345" y="78" fill="white" font-family="Arial, sans-serif" font-size="42" font-weight="700" text-anchor="middle">全国营业执照申报作废</text>
+  <text x="345" y="150" fill="white" font-family="Arial, sans-serif" font-size="42" font-weight="700" text-anchor="middle">全程人工代办服务</text>
+  <text x="345" y="243" fill="#226FC5" font-family="Arial, sans-serif" font-size="26" font-weight="700" text-anchor="middle">已在线服务 10004+ 家企业</text>
+</svg>

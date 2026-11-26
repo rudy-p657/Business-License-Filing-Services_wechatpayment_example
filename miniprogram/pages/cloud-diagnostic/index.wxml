@@ -1,0 +1,11 @@
+<view class="page">
+  <view class="row"><text class="label">运行时 AppID（{{appIdCheck}}）</text><text class="value">{{appId}}</text></view>
+  <view class="row"><text class="label">初始化环境（{{envIdCheck}}）</text><text class="value">{{envId}}</text></view>
+  <view class="row"><text class="label">wx.cloud.init 状态（仅本地）</text><text class="value">{{cloudInitStatus}}</text></view>
+  <view class="row"><text class="label">云调用 API 方法</text><text class="value">{{cloudAvailable ? '存在' : '不存在'}}</text></view>
+  <button class="probe-button" loading="{{testing}}" disabled="{{testing}}" bindtap="runProbe">{{testing ? '测试中' : '测试云函数调用'}}</button>
+  <view class="result">
+    <text class="result-title">{{status}}</text>
+    <text class="detail" selectable="true">{{detail}}</text>
+  </view>
+</view>

@@ -1,0 +1,50 @@
+{
+  "pages": [
+    "pages/service/index",
+    "pages/intro/index",
+    "pages/mine/index",
+    "pages/results/index",
+    "pages/business/index",
+    "pages/orders/index",
+    "pages/order-detail/index",
+    "pages/announcement-list/index",
+    "pages/announcement-detail/index",
+    "pages/cloud-diagnostic/index"
+  ],
+  "window": {
+    "backgroundColor": "#F4F6FA",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "navigationBarTitleText": "乐企通",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#8A94A6",
+    "selectedColor": "#1688E8",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/intro/index",
+        "text": "简介",
+        "iconPath": "images/icons/home.png",
+        "selectedIconPath": "images/icons/home-active-blue.png"
+      },
+      {
+        "pagePath": "pages/service/index",
+        "text": "服务",
+        "iconPath": "images/icons/goods.png",
+        "selectedIconPath": "images/icons/goods-active-blue.png"
+      },
+      {
+        "pagePath": "pages/mine/index",
+        "text": "我的",
+        "iconPath": "images/icons/usercenter.png",
+        "selectedIconPath": "images/icons/usercenter-active-blue.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2",
+  "lazyCodeLoading": "requiredComponents"
+}

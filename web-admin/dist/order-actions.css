@@ -1,0 +1,12 @@
+.order-bulk-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:12px 0;padding:12px 4px}
+.bulk-actions{display:flex;align-items:center;gap:8px}
+.bulk-actions select,.refund-actions select{min-height:36px;padding:0 10px;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:4px}
+.selection-cell{width:44px;min-width:44px;text-align:center!important}
+.selection-cell input{width:16px;height:16px;margin:0;accent-color:var(--blue);vertical-align:middle}
+.refund-controls{margin-top:14px;padding:14px 0;border-top:1px solid var(--line)}
+.refund-guidance,.refund-state{margin:0 0 12px;color:var(--muted);font-size:12px;line-height:1.6}
+.refund-actions{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.refund-actions label{color:#536170;font-size:12px;font-weight:600}
+.refund-actions select{flex:1;min-width:220px}
+.refund-actions .danger-button{padding:9px 13px}
+@media(max-width:650px){.order-bulk-toolbar{align-items:flex-start;flex-direction:column}.bulk-actions{display:grid;width:100%;grid-template-columns:minmax(0,1fr) auto}.refund-actions{display:grid;grid-template-columns:1fr}.refund-actions select{min-width:0}}

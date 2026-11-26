@@ -1,0 +1,22 @@
+<view class="page intro-page">
+  <image class="intro-banner" mode="aspectFill" src="/images/intro-banner.svg"></image>
+
+  <view class="card intro-card">
+    <view class="title-row">
+      <view class="line"></view>
+      <text>公司简介</text>
+      <view class="line"></view>
+    </view>
+    <view class="intro-text">
+      专注于为企业和个体工商户提供高效便捷的线上代办服务。我们深知创业维艰，更懂时间就是金钱。因此，我们以热情服务、高效管理、快捷处理为核心，致力于为您打造更轻松、更便捷的经营环境。
+    </view>
+    <view class="strong">专业团队，经验丰富：</view>
+    <view class="intro-text">我们拥有一支经验丰富的专业团队，熟悉各类工商、财税、知识产权等业务办理流程，能够为您提供精准、高效的代办服务。</view>
+    <view class="strong">线上操作，便捷高效：</view>
+    <view class="intro-text">告别繁琐的线下流程，您只需通过我们的线上平台提交资料，即可享受一站式代办服务，省时省力更省心。</view>
+    <view class="strong">进度透明，实时跟踪：</view>
+    <view class="intro-text">我们提供全程透明的进度跟踪服务，您可以随时了解业务办理进度，安心无忧。</view>
+    <view class="strong">价格透明，收费合理：</view>
+    <view class="intro-text">所有服务项目明码标价，绝无隐形消费，始终秉承客户至上、服务为本的理念。</view>
+  </view>
+</view>

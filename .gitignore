@@ -1,0 +1,54 @@
+# Windows
+[Dd]esktop.ini
+Thumbs.db
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+
+# Node.js
+node_modules/
+
+# WeChat DevTools generated npm bundle
+miniprogram/miniprogram_npm/
+
+# Local secrets and WeChat Pay certificates
+密钥.txt
+CA/
+**/cert/
+**/*.pem
+**/*.key
+**/*.p12
+**/*.pfx
+**/*.jks
+**/*.keystore
+
+# Local WeChat DevTools state and uploaded packages
+project.private.config.json
+workspaces/
+WXCertUtil/
+
+# Packaged desktop tools and runtime libraries
+*.exe
+*.dll
+*.lib
+*.qm
+
+# Local generated reports and exports
+analyse-data.json
+outputs/
+archive/
+api/
+云开发迁移说明.md
+企业查询与年报展示开发计划.md
+虚拟支付接入开发计划.md
+uploadCloudFunction.sh
+*.log
+*.wxapkg
+.env
+.env.*
+!.env.example

@@ -1,0 +1,22 @@
+<svg width="430" height="430" viewBox="0 0 430 430" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="430" height="430" fill="white"/>
+  <rect x="34" y="34" width="96" height="96" fill="black"/>
+  <rect x="52" y="52" width="60" height="60" fill="white"/>
+  <rect x="70" y="70" width="24" height="24" fill="black"/>
+  <rect x="300" y="34" width="96" height="96" fill="black"/>
+  <rect x="318" y="52" width="60" height="60" fill="white"/>
+  <rect x="336" y="70" width="24" height="24" fill="black"/>
+  <rect x="34" y="300" width="96" height="96" fill="black"/>
+  <rect x="52" y="318" width="60" height="60" fill="white"/>
+  <rect x="70" y="336" width="24" height="24" fill="black"/>
+  <g fill="black">
+    <rect x="166" y="34" width="22" height="22"/><rect x="210" y="34" width="44" height="22"/><rect x="166" y="78" width="66" height="22"/><rect x="254" y="78" width="22" height="44"/>
+    <rect x="166" y="144" width="22" height="66"/><rect x="210" y="144" width="22" height="22"/><rect x="254" y="144" width="44" height="22"/><rect x="320" y="166" width="22" height="44"/><rect x="364" y="166" width="22" height="22"/>
+    <rect x="34" y="166" width="22" height="44"/><rect x="78" y="166" width="66" height="22"/><rect x="100" y="210" width="22" height="44"/><rect x="144" y="232" width="44" height="22"/>
+    <rect x="210" y="210" width="44" height="22"/><rect x="276" y="210" width="22" height="66"/><rect x="342" y="232" width="54" height="22"/>
+    <rect x="166" y="276" width="22" height="22"/><rect x="210" y="276" width="66" height="22"/><rect x="320" y="276" width="22" height="22"/><rect x="364" y="276" width="22" height="66"/>
+    <rect x="166" y="320" width="44" height="22"/><rect x="232" y="320" width="22" height="66"/><rect x="276" y="342" width="66" height="22"/><rect x="386" y="364" width="22" height="44"/>
+    <rect x="144" y="364" width="44" height="22"/><rect x="276" y="386" width="22" height="22"/><rect x="320" y="386" width="44" height="22"/>
+  </g>
+  <text x="215" y="222" fill="#1677D2" font-family="Arial, sans-serif" font-size="24" font-weight="700" text-anchor="middle">收款码占位</text>
+</svg>

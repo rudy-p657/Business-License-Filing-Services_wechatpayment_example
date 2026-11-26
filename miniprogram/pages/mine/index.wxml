@@ -1,0 +1,23 @@
+<view class="mine-page">
+  <image class="mine-banner" mode="aspectFill" src="/images/mine-banner.svg"></image>
+
+  <view class="card menu-card">
+    <view class="menu-item" bindtap="goOrders">
+      <image src="/images/icons/order-blue.svg"></image>
+      <text class="menu-label">我的订单</text>
+      <text class="arrow">›</text>
+    </view>
+    <view class="menu-item">
+      <image src="/images/icons/customer-service-blue.svg"></image>
+      <text class="menu-label">在线客服</text>
+      <text class="arrow">›</text>
+      <button class="menu-hit-button" open-type="contact" aria-label="在线客服"></button>
+    </view>
+    <view class="menu-item">
+      <image src="/images/icons/share-blue.svg"></image>
+      <text class="menu-label">分享好友</text>
+      <text class="arrow">›</text>
+      <button class="menu-hit-button" open-type="share" aria-label="分享好友"></button>
+    </view>
+  </view>
+</view>

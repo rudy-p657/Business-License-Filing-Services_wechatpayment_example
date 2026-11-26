@@ -1,0 +1,8 @@
+<svg width="750" height="450" viewBox="0 0 750 450" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="750" height="450" fill="#061B34"/>
+  <path d="M0 300C105 246 179 288 283 227C386 167 484 176 582 118C653 76 700 80 750 58V450H0V300Z" fill="#0A75BF" opacity=".55"/>
+  <path d="M0 343C135 278 226 332 348 266C473 199 559 227 750 142V450H0V343Z" fill="#109DEB" opacity=".34"/>
+  <text x="375" y="190" fill="white" font-family="Arial, sans-serif" font-size="56" font-weight="700" text-anchor="middle">个体工商年报</text>
+  <text x="375" y="252" fill="white" opacity=".92" font-family="Arial, sans-serif" font-size="34" text-anchor="middle">线上办理 方便快捷</text>
+  <text x="375" y="312" fill="white" opacity=".82" font-family="Arial, sans-serif" font-size="24" text-anchor="middle">注意：自行申报通道免费</text>
+</svg>

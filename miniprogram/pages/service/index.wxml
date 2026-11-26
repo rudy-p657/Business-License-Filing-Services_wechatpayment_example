@@ -1,0 +1,20 @@
+<view class="page service-page">
+  <image class="banner" mode="aspectFill" src="/images/service-banner.svg"></image>
+  <view class="card search-card">
+    <view class="card-header"><view class="service-icon"></view><text class="header-title">企业服务</text></view>
+    <view class="search-box"><view class="search-icon"></view><input class="search-input" value="{{keyword}}" bindinput="onInput" placeholder="输入公司名称认证" placeholder-class="placeholder" confirm-type="search" bindconfirm="onSearch" /><button class="search-btn" bindtap="onSearch">搜索</button></view>
+    <view class="search-tip">可输入企业名称、营业执照名称、法人姓名或手机号进行搜索</view>
+  </view>
+  <view class="card notice-card">
+    <view class="notice-head"><view class="section-title">公告</view><text class="more" bindtap="goAnnouncementList">更多 ></text></view>
+    <view class="notice-item" wx:for="{{announcements}}" wx:key="id" data-id="{{item.id}}" bindtap="goAnnouncementDetail"><text>{{item.title}}</text><text class="muted">{{item.date}}</text></view>
+  </view>
+  <view class="block-title">我们的优势</view>
+  <view class="adv-grid"><view class="card adv-card" wx:for="{{advantages}}" wx:key="title"><view class="adv-icon">{{index + 1}}</view><view class="adv-title">{{item.title}}</view><view class="adv-desc">{{item.desc}}</view></view></view>
+  <view class="privacy-mask" wx:if="{{showPrivacy}}"></view>
+  <view class="privacy-popup" wx:if="{{showPrivacy}}">
+    <view class="pd-title">用户信息保护指引</view>
+    <view class="pd-content">在使用本小程序服务之前，请您仔细阅读并同意<text class="pd-link" bindtap="openPrivacyContract">《用户隐私保护指引》</text>。搜索及办理服务会处理企业名称、统一社会信用代码、法人姓名、您输入的查询手机号、身份证号和订单资料；查询信息会提供给水滴信用，订单资料通过腾讯云 CloudBase 保存，用于企业查询、身份核验、订单处理、代办服务及进度通知。运营主体为乐企通，联系电话：18760603320。手机号、身份证号及订单办理资料保存至业务办理、售后及争议处理完成所需的期限。</view>
+    <view class="pd-btn-group"><button class="pd-btn pd-btn-reject" bindtap="handleDisagree">不同意</button><button class="pd-btn pd-btn-agree" open-type="agreePrivacyAuthorization" bindagreeprivacyauthorization="handleAgree">同意并继续</button></view>
+  </view>
+</view>
